@@ -236,7 +236,7 @@ class CI_Session_mongo_driver extends CI_Session_driver implements SessionHandle
         $update_data = array('$set'=>array('timestamp' => time()));
         if ($this->_fingerprint !== md5($session_data))
         {
-            $update_data['data'] = $session_data;
+            $update_data['$set']['data'] = $session_data;
         }
 
         if ($this->_mongo->{$this->_mongo_config['table']}->update($wheres, $update_data, array('w' => $this->_mongo_config['w'], 'j'=>$this->_mongo_config['j'])))
